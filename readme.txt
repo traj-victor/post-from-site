@@ -1,17 +1,17 @@
-Est·gio de Desenvolvimento DOT Virtual - 31/08/2012
+Est√°gio de Desenvolvimento DOT Virtual - 31/08/2012
 
-AlteraÁıes:
-	-Permitir upload de mÌdia em qualquer formato
+Altera√ß√µes:
+	-Permitir upload de m√≠dia em qualquer formato
 	-Incluir post a uma categoria padrao (DOT Virtual)
-	-Criar mÈtodo para inserir marca d'·gua
-	-Na criaÁ„o do post, adicionar termos de serviÁo vindo dinamicamente de uma p·gina criada
-	-CriaÁ„o de canal do usu·rio, onde ele pode ver todos os seus posts e edit·-los
-	-Lista de tags prÈ-definidas no momento do upload para escolha do usu·rio
+	-Criar m√©todo para inserir marca d'√°gua
+	-Na cria√ß√£o do post, adicionar termos de servi√ßo vindo dinamicamente de uma p√°gina criada
+	-Cria√ß√£o de canal do usu√°rio, onde ele pode ver todos os seus posts e edit√°-los
+	-Lista de tags pr√©-definidas no momento do upload para escolha do usu√°rio
 
-PendÍncias: 
-	-Inserir marca d'·gua na exibiÁ„o dos uploads.
-	-Ajustar encoding para n„o corromper os arquivos quando tiverem caracteres especiais
-	-Encontrar plugin que reproduz a mÌdia de acordo com seu formato
+Pend√™ncias: 
+	-Inserir marca d'√°gua na exibi√ß√£o dos uploads.
+	-Ajustar encoding para n√£o corromper os arquivos quando tiverem caracteres especiais
+	-Encontrar plugin que reproduz a m√≠dia de acordo com seu formato
 	-Limitar tamanho total ocupado em 300mb
 	-Ajustar interface(CSS e JS)
 
@@ -21,12 +21,12 @@ Plugin Utilizado: Post From Site
 http://wordpress.org/extend/plugins/post-from-site/
 http://redradar.net/category/plugins/post-from-site/
 
-AlteraÁıes feitas:
+Altera√ß√µes feitas:
 Arquivo pfs-submit.php
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	Originalmente o plugin permitia que o upload fosse feito apenas com imagens, portanto, criamos um mÈtodo que permite realizar o upload de qualquer mÌdia, ficando desta maneira:
+	Originalmente o plugin permitia que o upload fosse feito apenas com imagens, portanto, criamos um m√©todo que permite realizar o upload de qualquer m√≠dia, ficando desta maneira:
 	/*
 	 * Method to upload any filetype.
 	 * @author: Victor Kurauchi
@@ -65,19 +65,19 @@ Arquivo pfs-submit.php
 	
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	Originalmente o plugin n„o permitia que o post inserido tivesse uma determinada categoria por padr„o, portanto, foi feito um Hack para forÁar que qualquer post inserido na sess„o DOT Virtual seja da categoria DOT Virtual por padr„o.
+	Originalmente o plugin n√£o permitia que o post inserido tivesse uma determinada categoria por padr√£o, portanto, foi feito um Hack para for√ßar que qualquer post inserido na sess√£o DOT Virtual seja da categoria DOT Virtual por padr√£o.
 	
-	Inserir shortcode na pagina desejada para DOT Virtual - [post-from-site cat='3']        // Onde cat È o ID da categoria que ser· indexada por padr„o a todos os posts do DOT Virtual.
-																							// N„o esqueÁa de mudar o ID quando for criar a nova categoria DOTVirtual no novo Wordpress.
+	Inserir shortcode na pagina desejada para DOT Virtual - [post-from-site cat='3']        // Onde cat √© o ID da categoria que ser√° indexada por padr√£o a todos os posts do DOT Virtual.
+																							// N√£o esque√ßa de mudar o ID quando for criar a nova categoria DOTVirtual no novo Wordpress.
 	
-	->Na linha de cÛdigo 26, onde: 
+	->Na linha de c√≥digo 26, onde: 
 	$category = $pfs_data['cat']; 
 	
-	NÛs obtemos a categoria que foi definida por padr„o anteriormente no arquivo post-from-site.class.php
-	no formul·rio de envio de mÌdia, criamos um input type 'Hidden', ficando desta maneira:
+	N√≥s obtemos a categoria que foi definida por padr√£o anteriormente no arquivo post-from-site.class.php
+	no formul√°rio de envio de m√≠dia, criamos um input type 'Hidden', ficando desta maneira:
 	
 	No arquivo post-from-site.class.php
-	// No momento de envio de formul·rio, criamos o input hidden para permitir a escolha da categoria pelo seu nome/id definida pela vari·vel $cat.
+	// No momento de envio de formul√°rio, criamos o input hidden para permitir a escolha da categoria pelo seu nome/id definida pela vari√°vel $cat.
 	$out .= "<input type='hidden' name='cat' value='" .$cat. "' />\n";	
 	
 	------------
@@ -87,17 +87,17 @@ Arquivo pfs-submit.php
 	/* Forcar que todo post inserido seja indexado a categoria DOT Virtual*/
 	$category = $pfs_data['cat'];
 	
-	E durante o momento de execuÁ„o do mÈtodo para inserir o post, associamos a categoria obtida ao post que ser· inserido.
-	$postarr['post_category'] = array($category);						#Neste momento, o post È associado a categoria DOTVirtual
+	E durante o momento de execu√ß√£o do m√©todo para inserir o post, associamos a categoria obtida ao post que ser√° inserido.
+	$postarr['post_category'] = array($category);						#Neste momento, o post √© associado a categoria DOTVirtual
 	
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  
 
-	Originalmente o plugin n„o permitia que o upload realizado no momento de envio fosse indexado ao post criado.
-	Exemplo: Ao inserir um post pelo DOT Virtual, apÛs escolher a mÌdia que quer fazer upload, quando o formul·rio fosse submetido, n„o seria possÌvel saber a qual post a mÌdia est· relacionada.
-	Para isto, foi alterado o cÛdigo do formul·rio de envio, onde primeiro criamos o post, fazemos o upload da mÌdia e a indexamos ao post criado e depois fazemos um update no post para atualizar a mÌdia que foi inserida, 
+	Originalmente o plugin n√£o permitia que o upload realizado no momento de envio fosse indexado ao post criado.
+	Exemplo: Ao inserir um post pelo DOT Virtual, ap√≥s escolher a m√≠dia que quer fazer upload, quando o formul√°rio fosse submetido, n√£o seria poss√≠vel saber a qual post a m√≠dia est√° relacionada.
+	Para isto, foi alterado o c√≥digo do formul√°rio de envio, onde primeiro criamos o post, fazemos o upload da m√≠dia e a indexamos ao post criado e depois fazemos um update no post para atualizar a m√≠dia que foi inserida, 
 	ficando desta maneira:
 	
-	// CriaÁ„o do post
+	// Cria√ß√£o do post
 	$postarr = array();
 	$postarr['post_title'] = $title;
 	$postarr['comment_status'] = $pfs_options['comment_status'];
@@ -105,10 +105,10 @@ Arquivo pfs-submit.php
 	$postarr['post_author'] = ( is_user_logged_in() ) ? $user_ID : $pfs_options['default_author'];
 	$postarr['tax_input'] = (array_key_exists('terms',$pfs_data)) ? $pfs_data['terms'] : array();
 	$postarr['post_type'] = $pfs_options['post_type'];
-	$postarr['post_category'] = array($category);						#Neste momento, o post È associado a categoria DOTVirtual
+	$postarr['post_category'] = array($category);						#Neste momento, o post √© associado a categoria DOTVirtual
 	$post_id = wp_insert_post($postarr);
 	
-	// Upload da mÌdia
+	// Upload da m√≠dia
 	$file = $pfs_files['file-upload'];
 	$result['file-upload'] = 'single';
 	
@@ -140,7 +140,7 @@ Arquivo pfs-submit.php
 		return false;
 	}
 	
-	// AtualizaÁao do post para pertmir que o upload seja indexado corretamente.
+	// Atualiza√ßao do post para pertmir que o upload seja indexado corretamente.
 	$my_post = array();
 	$my_post['ID'] = $post_id;
 	$my_post['post_content'] = $content . "<br/>"  . $post_id->post_content ;
@@ -151,18 +151,18 @@ Arquivo pfs-submit.php
 	
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	Originalmente o plugin n„o tinha a parte 'Termos de ServiÁo' no momento do upload, portanto, criamos a parte dos termos vindo dinamicamente de uma p·gina criada para facilitar alteraÁıes no conte˙do, ficando desta maneira: 
+	Originalmente o plugin n√£o tinha a parte 'Termos de Servi√ßo' no momento do upload, portanto, criamos a parte dos termos vindo dinamicamente de uma p√°gina criada para facilitar altera√ß√µes no conte√∫do, ficando desta maneira: 
 	
-	// No arquivo post-from-site.class.php definimos uma vari·vel para obter o ID da p·gina desejada.
-	$pageid = 86;             // Setado estaticamente para testes, em produÁ„o podemos obter pelo titulo get_page_by_title('Termos de serviÁo'); ou simplesmente por pageId.
+	// No arquivo post-from-site.class.php definimos uma vari√°vel para obter o ID da p√°gina desejada.
+	$pageid = 86;             // Setado estaticamente para testes, em produ√ß√£o podemos obter pelo titulo get_page_by_title('Termos de servi√ßo'); ou simplesmente por pageId.
 	$pagedata = get_page( $pageid );
 	
-	// J· no formul·rio, incluÌmos algum cÛdigo para permitir que o conte˙do deste campo de Termos venha de uma p·gina criada anteriormente (page ID 86 - Termos) e o usu·rio n„o possa editar pelo front end.
-	$out .= "<label for='terms-text'>". __('Termos de ServiÁo:','pfs_domain'). "</label><textarea id='terms-text' name='terms-text' rows='12' cols='50' readonly='readonly'> \n". $pagedata->post_content."</textarea>\n";
+	// J√° no formul√°rio, inclu√≠mos algum c√≥digo para permitir que o conte√∫do deste campo de Termos venha de uma p√°gina criada anteriormente (page ID 86 - Termos) e o usu√°rio n√£o possa editar pelo front end.
+	$out .= "<label for='terms-text'>". __('Termos de Servi√ßo:','pfs_domain'). "</label><textarea id='terms-text' name='terms-text' rows='12' cols='50' readonly='readonly'> \n". $pagedata->post_content."</textarea>\n";
 	
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	MÈtodo criado para permitir a inclusao de marca d'·gua para ser exibida nas midias de upload.
+	M√©todo criado para permitir a inclusao de marca d'√°gua para ser exibida nas midias de upload.
 	watermark.php
 	<?php
 	// Load the stamp and the photo to apply the watermark to
@@ -187,7 +187,7 @@ Arquivo pfs-submit.php
 	
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-	P·gina criada para o canal do usu·rio, j· obtendo todos os seus posts e permitindo a ediÁ„o do mesmo seguindo um template canal do usu·rio
+	P√°gina criada para o canal do usu√°rio, j√° obtendo todos os seus posts e permitindo a edi√ß√£o do mesmo seguindo um template canal do usu√°rio
 	canal_usuario.php na raiz do tema.
 	
 	<?php 
@@ -260,32 +260,32 @@ Arquivo pfs-submit.php
 	
 	##########################################################
 	
-PendÍncias:
+Pend√™ncias:
 
-	- Inserir marca d'·gua na exibiÁ„o dos uploads.
-	O mÈtodo foi criado, porÈm ser· necess·rio fazer os ajustes para obter a imagem que foi postada pelo usu·rio e para cada imagem inserir a marca d'·gua. Assim, no momento que o usu·rio for visualizar ou baixar a mÌdia, 
-	a marca d'·gua estar· na imagem.
+	- Inserir marca d'√°gua na exibi√ß√£o dos uploads.
+	O m√©todo foi criado, por√©m ser√° necess√°rio fazer os ajustes para obter a imagem que foi postada pelo usu√°rio e para cada imagem inserir a marca d'√°gua. Assim, no momento que o usu√°rio for visualizar ou baixar a m√≠dia, 
+	a marca d'√°gua estar√° na imagem.
 	
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-	- Ajustar encoding para n„o corromper os arquivos quando tiverem caracteres especiais
-	Pelo fato de diversos arquivos terem o seu nome com caracteres especiais, no momento em que o usu·rio for visualizar a p·gina, ela nao ser· encontrada. Para isto, dever· ser feito uma alteraÁ„o no momento de inserir o upload de mÌdia. Algo como a funÁ„o sanitize ou urlencode no nome do arquivo quando for mandado para o banco de dados.
+	- Ajustar encoding para n√£o corromper os arquivos quando tiverem caracteres especiais
+	Pelo fato de diversos arquivos terem o seu nome com caracteres especiais, no momento em que o usu√°rio for visualizar a p√°gina, ela nao ser√° encontrada. Para isto, dever√° ser feito uma altera√ß√£o no momento de inserir o upload de m√≠dia. Algo como a fun√ß√£o sanitize ou urlencode no nome do arquivo quando for mandado para o banco de dados.
 	Ou talvez mudar o encoding do banco do wordpress, e testar no Wordpress sem ser no servidor local.
 	
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
-	- Encontrar plugin que reproduz a mÌdia de acordo com seu formato
-	Atualmente quando o usu·rio clicar na mÌdia desejada, ser· direcionada para p·gina de download do arquivo. A ideia È que haja algum reprodutor de mÌdia para todos os formatos, e seja reconhecida no momento em que o usu·rio
+	- Encontrar plugin que reproduz a m√≠dia de acordo com seu formato
+	Atualmente quando o usu√°rio clicar na m√≠dia desejada, ser√° direcionada para p√°gina de download do arquivo. A ideia √© que haja algum reprodutor de m√≠dia para todos os formatos, e seja reconhecida no momento em que o usu√°rio
 	clicar pra visualizar. 
 	
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	- Limitar tamanho total ocupado em 300mb
-	Configurar que o tamanho total dos arquivos enviados pro usu·rio tenha o limite de 300mb e o limite por arquivo seja de 50mb.
-	Deve ser configur·vel via backend.
+	Configurar que o tamanho total dos arquivos enviados pro usu√°rio tenha o limite de 300mb e o limite por arquivo seja de 50mb.
+	Deve ser configur√°vel via backend.
 	
 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 	
 	- Ajustar interface(CSS e JS)
-	As classes, divs e ids j· est„o definidas, porÈm com a estilizaÁ„o padr„o do plugin juntamente com o tema twenty eleven.
-	Validar com javascript ou jquery o campo dos termos de serviÁo. Permitindo apenas o envio do formul·rio quando o usu·rio concordar com os termos	
+	As classes, divs e ids j√° est√£o definidas, por√©m com a estiliza√ß√£o padr√£o do plugin juntamente com o tema twenty eleven.
+	Validar com javascript ou jquery o campo dos termos de servi√ßo. Permitindo apenas o envio do formul√°rio quando o usu√°rio concordar com os termos	
